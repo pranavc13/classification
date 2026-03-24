@@ -1,0 +1,203 @@
+/* ── Reset / base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0d0f14;
+  --surface:   #161921;
+  --border:    #272b36;
+  --text:      #c9cdd6;
+  --text-dim:  #636878;
+  --accent:    #5b8df6;
+  --accent-hv: #7aa3ff;
+  --radius:    12px;
+  --font: system-ui, 'Segoe UI', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  min-height: 100svh;
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+header {
+  text-align: center;
+}
+header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+header p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+/* ── Drop zone ────────────────────────────────────────────────────────────── */
+.dropzone {
+  width: 100%;
+  max-width: 540px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 56px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.dropzone:hover,
+.dropzone.dragging {
+  border-color: var(--accent);
+  background: rgba(91, 141, 246, 0.06);
+}
+.dropzone svg {
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.dropzone span {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.dropzone small {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+/* ── Loading state ────────────────────────────────────────────────────────── */
+.state-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+/* ── Results grid ─────────────────────────────────────────────────────────── */
+.results {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.panel label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+}
+.panel img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.img-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+  margin: 28px 24px 0;
+}
+
+/* ── Actions ──────────────────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.15s;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-primary:hover,
+.btn-secondary:hover { opacity: 0.85; }
+
+/* ── Error ────────────────────────────────────────────────────────────────── */
+.error-msg {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+/* ── Spinner ──────────────────────────────────────────────────────────────── */
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .results {
+    flex-direction: column;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+  }
+}
